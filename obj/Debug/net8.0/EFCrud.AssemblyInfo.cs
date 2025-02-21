@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EFCrud")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e2add3ce6d96965e4397427e661796cc07fb29d5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3cccd2ec74538970b9d73e652604e238074319e2")]
 [assembly: System.Reflection.AssemblyProductAttribute("EFCrud")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EFCrud")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
