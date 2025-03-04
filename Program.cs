@@ -1,4 +1,5 @@
 
+using System.Text.Json.Serialization;
 using EFCrud.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,9 +13,16 @@ namespace EFCrud
 
             // Add services to the container.
 
-            builder.Services.AddDbContext<DepartDBContext>(option => 
+            builder.Services.AddDbContext<EcommerceDBcontext>(option => 
             option.UseSqlServer(builder.Configuration.GetConnectionString("DBString"))
             );
+
+            // In Program.cs, add this before services.AddControllers()
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                });
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
