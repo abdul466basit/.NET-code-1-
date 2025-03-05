@@ -12,7 +12,6 @@ namespace EFCrud.Data
         
         public CustomerDetails CustomerDetails { get; set; }    
         public ICollection<Order> Orders { get; set; }
-
     }
 }
 

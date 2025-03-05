@@ -24,13 +24,13 @@ namespace EFCrud.Controllers
                 .Include(c => c.CustomerDetails)
                 .Select(c => new CustomerDTO
                 {
-                    CustomerId = c.customerId,
-                    CustomerName = c.customerName,
+                    customerId = c.customerId,
+                    customerName = c.customerName,
                     Details = new CustomerDetailsDTO
                     {
-                        CustomerId = c.CustomerDetails.customerId,
-                        Address = c.CustomerDetails.address,
-                        PhoneNumber = c.CustomerDetails.phoneNumber
+                        customerId = c.CustomerDetails.customerId,
+                        address = c.CustomerDetails.address,
+                        phoneNumber = c.CustomerDetails.phoneNumber
                     }
                 })
                 .ToListAsync();

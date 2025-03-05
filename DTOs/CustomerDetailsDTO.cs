@@ -2,15 +2,15 @@
 {
     public class CustomerDetailsDTO
     {
-        public int CustomerId { get; set; }
-        public string Address { get; set; }
-        public string PhoneNumber { get; set; }
+        public int customerId { get; set; }
+        public string address { get; set; }
+        public string phoneNumber { get; set; }
     }
 
     public class CustomerDTO
     {
-        public int CustomerId { get; set; }
-        public string CustomerName { get; set; }
+        public int customerId { get; set; }
+        public string customerName { get; set; }
         public CustomerDetailsDTO Details { get; set; }
     }
 }
