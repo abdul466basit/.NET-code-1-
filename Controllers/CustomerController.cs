@@ -90,6 +90,73 @@ namespace EFCrud.Controllers
             }
         }
 
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateCustomer(int id, [FromBody] UpdateCustomerDTO customerDTO)
+        {
+            try
+            {
+                var customer = await ecommerceDBcontext.Customers
+                    .Include(c => c.CustomerDetails)
+                    .FirstOrDefaultAsync(c => c.customerId == id);
+
+                if (customer == null)
+                    return NotFound("Customer not found");
+
+                // Update fields
+                customer.customerName = customerDTO.customerName;
+
+                if (customer.CustomerDetails != null)
+                {
+                    customer.CustomerDetails.address = customerDTO.Details.address;
+                    customer.CustomerDetails.phoneNumber = customerDTO.Details.phoneNumber;
+                }
+
+                await ecommerceDBcontext.SaveChangesAsync();
+
+                var response = new CustomerResponseDTO
+                {
+                    customerId = customer.customerId,
+                    customerName = customer.customerName,
+                    Details = new CustomerDetailsResponseDTO
+                    {
+                        address = customer.CustomerDetails.address,
+                        phoneNumber = customer.CustomerDetails.phoneNumber
+                    }
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error updating customer: " + ex.Message);
+            }
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCustomer(int id)
+        {
+            try
+            {
+                var customer = await ecommerceDBcontext.Customers
+                    .Include(c => c.CustomerDetails)
+                    .FirstOrDefaultAsync(c => c.customerId == id);
+
+                if (customer == null)
+                    return NotFound("Customer not found");
+
+                ecommerceDBcontext.Customers.Remove(customer);
+                await ecommerceDBcontext.SaveChangesAsync();
+
+                return NoContent(); // 204 No Content response
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error deleting customer: " + ex.Message);
+            }
+        }
+
     }
 }
 
