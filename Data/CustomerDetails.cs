@@ -7,6 +7,7 @@ namespace EFCrud.Data
     {
         [Key]
         [ForeignKey("Customer")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int customerId { get; set; }
         public string address { get; set; }
         public string phoneNumber { get; set; }

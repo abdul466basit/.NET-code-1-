@@ -6,6 +6,7 @@ namespace EFCrud.Data
     public class Product
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int productId { get; set; }
         public string productname { get; set; }
 
