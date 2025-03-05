@@ -37,16 +37,6 @@ namespace EFCrud.Controllers
             return Ok(customers);
         }
 
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetCustomerByIdAsync([FromRoute] int id)
-        //{
-        //    var customer = await this.ecommerceDBcontext.Customers
-        //        .Include(c => c.CustomerDetails)
-        //        .Include(c => c.Orders)
-        //        .FirstOrDefaultAsync(c => c.customerId == id);
-        //    return Ok(customer);
-        //}
-
         [HttpGet("{id}")]
         [ActionName(nameof(GetCustomerByIdAsync))]
         public async Task<IActionResult> GetCustomerByIdAsync([FromRoute] int id)
@@ -78,7 +68,21 @@ namespace EFCrud.Controllers
                 ecommerceDBcontext.Customers.Add(customer);
                 await ecommerceDBcontext.SaveChangesAsync();
 
-                return CreatedAtAction(nameof(GetCustomerByIdAsync), new { id = customer.customerId }, customer);
+
+
+                var response = new CustomerResponseDTO
+                {
+                    customerId = customer.customerId,
+                    customerName = customer.customerName,
+                    Details = new CustomerDetailsResponseDTO
+                    {
+                        address = customer.CustomerDetails.address,
+                        phoneNumber = customer.CustomerDetails.phoneNumber
+                    }
+                };
+
+
+                return CreatedAtAction(nameof(GetCustomerByIdAsync), new { id = customer.customerId }, response);
             }
             catch (Exception ex)
             {
